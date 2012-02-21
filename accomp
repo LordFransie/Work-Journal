@@ -1,0 +1,26 @@
+#!/bin/bash
+#Work Journal
+WHEN=`date "+%m/%d/%y %r"`
+NOW=`date "+%s"`
+THEN=`tail -1 ~/.completed`
+BETWEEN=$((NOW-THEN))
+if [ $# = 0 ]; then
+echo "Syntax accomp -[tp]"
+echo "    -t will show you time since last entry"
+echo "    -p will show you the entire entry log"
+exit
+fi
+if [ $1 = "-p" ]; then
+sed '$d' < ~/.completed
+exit
+fi
+if [ $1 = "-t" ]; then
+echo  | awk -v "S=$BETWEEN" '{printf "%dh:%dm:%ds",S/(60*60),S%(60*60)/60,S%60}'
+exit
+fi
+
+echo $WHEN $@
+echo - | awk -v "S=$BETWEEN" '{printf "%dh:%dm:%ds",S/(60*60),S%(60*60)/60,S%60}'
+sed '$d' < ~/.completed > ~/.completedtemp ; mv ~/.completedtemp ~/.completed
+echo $WHEN $@ >> ~/.completed
+echo $NOW >> ~/.completed
