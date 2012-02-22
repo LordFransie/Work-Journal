@@ -20,8 +20,21 @@ def add_prompt():
 def add( entry ):
 	log.append( {"id":(1 + len(log)), "time":time.gmtime(), "log":entry} )
 
+#It is important that when removing items from the array that it is still kept in order
+def remove():
+	for x in log:
+		print x["id"],strftime("%a, %d %b %Y %H:%M:%S", x["time"]), x["log"]
+	index= input('Remove which Element: ') - 1
+	del log[index]
+	i=1;
+	for x in log:
+		x["id"] = i
+		i = i + 1
+
 if sys.argv[1] == "-a":
 	add_prompt()
+if sys.argv[1] == "-d":
+	remove()
 
 
 for x in log:
