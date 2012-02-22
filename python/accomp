@@ -1,0 +1,20 @@
+#!/usr/bin/python
+
+import math, sys, time
+if len(sys.argv) != 2:
+    print 'Usage: %s [-t] [-p] ' % (sys.argv[0])
+    sys.exit(1)
+
+f = open('/home/user/.completed', 'r')
+f.readline()
+for line in f:
+	print line,
+cust= [{"id":1,"name":u"name 1","bill_amount":1000},
+       {"id":1,"name":u"name 2","bill_amount":5000},
+       {"id":3,"name":u"name 3","bill_amount":7600},
+       {"id":1,"name":u"name 4","bill_amount":30}
+      ]
+for x in cust:
+	print x["id"], x["name"], x["bill_amount"]
+print time.time()
+dict 
