@@ -1,20 +1,21 @@
 #!/usr/bin/python
 
-import math, sys, time
+import math, sys, time, pickle
 if len(sys.argv) != 2:
     print 'Usage: %s [-t] [-p] ' % (sys.argv[0])
     sys.exit(1)
-
-f = open('/home/user/.completed', 'r')
-f.readline()
-for line in f:
-	print line,
-cust= [{"id":1,"name":u"name 1","bill_amount":1000},
-       {"id":1,"name":u"name 2","bill_amount":5000},
-       {"id":3,"name":u"name 3","bill_amount":7600},
-       {"id":1,"name":u"name 4","bill_amount":30}
+cust= [{"id":1,"time":u"name 1","log":u"Started Project A"},
+       {"id":2,"time":u"name 2","log":u"Ended Project A"},
+       {"id":3,"time":u"name 3","log":u"Started Project B"},
+       {"id":4,"time":u"name 4","log":u"Ended Project B"}
       ]
+
 for x in cust:
-	print x["id"], x["name"], x["bill_amount"]
+	print x["id"], x["time"], x["log"]
 print time.time()
-dict 
+
+pickle.dump( cust,  open( "/home/user/.completed", "wb" )  )
+
+favorite_color = pickle.load( open( "/home/user/.completed", "rb" ) )
+for x in favorite_color:
+        print x["id"], x["time"], x["log"]
