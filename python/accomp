@@ -1,21 +1,30 @@
 #!/usr/bin/python
 
-import math, sys, time, pickle
+import math, sys, time, pickle, os.path
+from time import gmtime, strftime
 if len(sys.argv) != 2:
     print 'Usage: %s [-t] [-p] ' % (sys.argv[0])
     sys.exit(1)
-cust= [{"id":1,"time":u"name 1","log":u"Started Project A"},
-       {"id":2,"time":u"name 2","log":u"Ended Project A"},
-       {"id":3,"time":u"name 3","log":u"Started Project B"},
-       {"id":4,"time":u"name 4","log":u"Ended Project B"}
-      ]
+#Loads the log
+if os.path.isfile("/home/user/.completed"):
+	f = open( "/home/user/.completed" , "rwb" ) 
+try:
+	log = pickle.load( open( "/home/user/.completed" , "rb" ) )
+except EOFError:
+	log = []
 
-for x in cust:
-	print x["id"], x["time"], x["log"]
-print time.time()
+#This adds an entry to log
+def add_prompt():
+ 	log.append( {"id":(1 + len(log)), "time":time.gmtime(), "log":raw_input('Entry: ')} )
+	
+def add( entry ):
+	log.append( {"id":(1 + len(log)), "time":time.gmtime(), "log":entry} )
 
-pickle.dump( cust,  open( "/home/user/.completed", "wb" )  )
+if sys.argv[1] == "-a":
+	add_prompt()
 
-favorite_color = pickle.load( open( "/home/user/.completed", "rb" ) )
-for x in favorite_color:
-        print x["id"], x["time"], x["log"]
+
+for x in log:
+        print x["id"],strftime("%a, %d %b %Y %H:%M:%S", x["time"]), x["log"]
+
+pickle.dump( log,  open( "/home/user/.completed", "wb" )  )
