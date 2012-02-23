@@ -2,10 +2,13 @@ This piece of software is intended to keep track of work that was done by a user
 Currently this is accomplished by saving it to a simple text file in the home DIR of the user
 
 TODO
+-GUI
+
+
+
+PIPE DREAM LIST
 -Make this "cloud" based so the work record can be used on any platform
    -This might include making some sort of WEB UI for it (Think of all the fun with AJAX to be had)
--Actually any kind of UI would be nice, as it is currently all command line. Though it is simple enough where hooking in wouldn't be difficult.
 -I want to add a daemon that checks if a task has been taking to long and reminds you to get back to work
    -This would be accomplished with BoxCar.
--I would like to migrate this to Python but I currently no near nothing about it so that might take some time.
 
